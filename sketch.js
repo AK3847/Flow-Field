@@ -17,7 +17,7 @@ function setup() {
   }
 //   textFont(font);    
   button = createButton("Number of Particles");
-  parts = createSlider(1000, 5000, 3000);
+  parts = createSlider(25, 5000, 2500);
   createP("");
   button = createButton("Noise Scale");
   nsc = createSlider(100, 2000, 500, 100);
@@ -26,7 +26,7 @@ function setup() {
   tl = createSlider(10, 200, 50, 10);
   createP("");
   button = createButton("Angle");
-  ang = createSlider(0, 720, 60);
+  ang = createSlider(0, 360, 60);
   createP("");
   button = createButton("Noise Strength");
   sd = createSlider(0, 1000, 100);
