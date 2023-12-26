@@ -53,15 +53,17 @@ function draw() {
     for (let i = 0; i < partnum; i++) {
       let p = particles[i];
       let particlecolor = colors[int(random(colors.length))];
-      let n = noise(p.x / noisescale, p.y / noisescale);
-      let a = angle * n;
+    //   let n = noise(p.x / noisescale, p.y / noisescale);
+    let n=noise(p.x*0.003,p.y*0.003);
+    //   let a = angle * n;
+    let a=n*4*PI;
       point(p.x, p.y);
       p.x += cos(a) * speedMultiplier;
       p.y += sin(a) * speedMultiplier;
-      if (!screenchk(p)) {
-        p.x = random(width);
-        p.y = random(height);
-      }
+    //   if (!screenchk(p)) {
+    //     p.x = random(width);
+    //     p.y = random(height);
+    //   }
     //   stroke(0);
     }
   }
