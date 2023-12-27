@@ -2,6 +2,14 @@
   font-family: mordona;
   src: url(/assets/Raleway-Italic-VariableFont_wght.ttf);
 }
+@font-face {
+  font-family: Aracme;
+  src: url(/assets/Aracme\ Waround.ttf);
+}
+@font-face {
+  font-family: maison;
+  src: url(/assets/MaisondeartisanfreeRegular-qZl52.otf);
+}
 html,
 body {
   margin: 0;
@@ -12,27 +20,42 @@ body {
   width: 100%;
   height: 20vh;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   line-height: 0%;
-  font-size: 6em;
+  font-size: max(6vw,6vh);
+  /* font-size: 20px; */
   padding-bottom: 2%;
-  font-family: mordona;
+  font-family: Aracme;
   font-weight: 100;
-  color: white;
+  color: #FDE5D4;
   /* text-decoration: underline; */
+}
+#nav span{
+  visibility: collapse;
+  display: none;
+  font-family: mordona;
+}
+#nav p{
+  /* flex: 50%; */
 }
 
 #control-wrap{
-  font-family: mordona;
-  max-width:22%;
-  /* overflow-y: scroll; */
-  max-height:calc(100vh - 150px);
-  color: white;
+  margin-left: 0.2em;
+  font-family: maison;
+  max-width:200px;
+  display:inline-block;
+  max-height:calc(80vh - 100px);
+  color: #B0A695;
+  font-weight: 800;
+  font-size: 1.1em;
 }
 
 #control-wrap p{
-  font-size: 2em; 
+  margin-left: 0em;
+  font-size: 3em; 
   line-height: 0%;
+  margin-bottom: 0.6em;
 }
 
 #control-wrap span{
@@ -41,6 +64,7 @@ body {
 
 #main-container{
   display: flex;
+  flex-direction: row;
 }
 
 
@@ -50,21 +74,58 @@ body {
   justify-content: center;
   text-align: center;
   width: 100%;
-  color: #F5EDCE;
-  z-index: 999;
+  color: #FDE5D4;
+  /* z-index: 999; */
   position: absolute;
   bottom: 0;
 }
 
-#footer a{
+a{
   text-decoration: none;
   color: inherit;
 }
 
 .butn{
-  background-color:#F5EDCE;
+  background-color:#FDE5D4;
 }
 
 #canvas-container{
-  border: 0.02em solid #F5EDCE;
+  border: 0.001em outset #FDE5D4;
+}
+
+#two{
+  font-weight: 400;
+  color: #FDE5D4;
+  font-weight: 200;
+}
+@media screen and (max-width:560px) {
+    #nav{
+      flex-direction: column;
+      margin-top: 20px;
+    }  
+    #nav p{
+      font-size: 14vw;
+      margin-top: 10px;
+    }
+    #control-wrap p{
+      font-size: 2em; 
+      line-height: 0%;
+    }
+    #control-wrap span{
+      margin: 0.3em;
+      font-size: 1em;
+    }
+    #main-container{
+      display: flex;
+      flex-direction: column;
+    }
+    #footer{
+      visibility: hidden;
+    }
+    #nav span{
+      visibility: visible;
+      display: block;
+      font-size: 0.3em;
+
+    }
 }
