@@ -1,80 +1,118 @@
-let particles = [];
-let partnum = 5000;
-let noisescale = 0.008;
-let traillength = 50;
-var parts, nsc, tl, ang;
-let mxtraillength = 500;
-let angle;
-let randomcolor=false;
-let seed=500;
-let speedMultiplier=1;
-let colors=[[0, 173, 181],[184, 59, 94],[184, 59, 94],[254, 252, 243]]
-function setup() {
-  frameRate(60);
-  createCanvas(windowWidth, windowHeight * 0.66);
-  for (let i = 0; i < partnum; i++) {
-    particles.push(createVector(random(width), random(height)));
-  }
-//   textFont(font);    
-  button = createButton("Number of Particles");
-  parts = createSlider(25, 5000, 2500);
-  createP("");
-  button = createButton("Noise Scale");
-  nsc = createSlider(100, 2000, 500, 100);
-  createP("");
-  button = createButton("Trail Length");
-  tl = createSlider(10, 200, 50, 10);
-  createP("");
-  button = createButton("Angle");
-  ang = createSlider(0, 360, 60);
-  createP("");
-  button = createButton("Noise Strength");
-  sd = createSlider(0, 1000, 100);
-  createP("");
-  angle = TWO_PI;
-  stroke(255);
-}
-function draw() {
-  partnum = parts.value();
-  traillength = 100 - tl.value();
-  angle = ang.value();
-  noisescale = nsc.value();
-  seed=sd.value();
-  background(0, traillength);
-  for (let i = 0; i < partnum; i++) {
-      let p = particles[i];
-      let particlecolor = colors[int(random(colors.length))];
-      let n = noise(p.x / noisescale, p.y / noisescale);
-      let a = angle * n;
-      point(p.x, p.y);
-      p.x += cos(a) * speedMultiplier;
-      p.y += sin(a) * speedMultiplier;
-      if (!screenchk(p)) {
-        p.x = random(width);
-        p.y = random(height);
-      }
-    //   stroke(0);
-    }
-  }
-function randomfill(Randomfill)
+let X_START=0;
+const Y_START=0;
+let xoff=0,yoff=0,zoff=0;
+let particles=[],flowfield=[];
+let canvas;
+let nrow, ncol, rectWidth, rectHeight;
+let xIncrementSlider, yIncrementSlider, zIncrementSlider, particleSlider, opacitySlider, strokeColorPicker, backgroundColorPicker;
+
+function makeControls()
 {
-    var r,g,b;
-    if(Randomfill){
-        r=map(sin(angle),-1,1,100,200);
-        g=map(sin(angle),-1,1,100,200);
-        b=map(sin(angle),-1,1,100,200);
+
+  let controlWrapper = createDiv().id("control-wrap");
+  let controlHeader = createDiv("<h2>Controls</h2>");
+  controlHeader.parent(controlWrapper);
+  nrowSlider = Slider("Vertical Anchors", minVal = 2, maxVal = 50, value = 30, step = 1, parent = controlWrapper, clearContent);
+  ncolSlider = Slider("Horizontal Anchors", minVal = 2, maxVal = 50, value = 30, step = 1, parent = controlWrapper, clearContent);
+  xIncrementSlider = Slider("Horizontal Smoothness", minVal = .0001, maxVal = .3, value = .05, step = .0001, parent = controlWrapper, clearContent);
+  yIncrementSlider = Slider("Vertical Smoothness", minVal = .0001, maxVal = .3, value = .05, step = .0001, parent = controlWrapper, clearContent);
+  zIncrementSlider = Slider("Fluctuations in Forces", minVal = 0, maxVal = .3, value = .01, step = .0001, parent = controlWrapper, clearContent);
+  particleSlider = Slider("Number of Particles", minVal = 10, maxVal = 10000, value = 500, step = 10, parent = controlWrapper, clearContent);
+  opacitySlider = Slider("Line Opacity", minVal = 0, maxVal = 1, value = .1, step = .01, parent = controlWrapper);
+  strokeColorPicker = Colorpicker("Line Color", startColor = "rgb(216, 60, 95)", parent = controlWrapper);
+  backgroundColorPicker = Colorpicker("Background Color", startColor = "black", parent = controlWrapper, (d) => setBackgroundColor(d));
+
+  // Buttons
+  Button("Pause", controlWrapper, noLoop);
+  Button("Resume", controlWrapper, loop);
+  Button("Clear&nbsp;&nbsp;", controlWrapper, clearContent);
+  Button("Download", controlWrapper, download);
+  Button("About", controlWrapper, () => {}, "modal");
+  Button("GitHub", controlWrapper, () => {
+    window.open("https://github.com/AK3847/Flow-Field", "_blank");
+  });
+  return controlWrapper;
+
+}
+
+function download() {
+  noLoop(); // pause
+  let link = document.createElement('a');
+  link.download = 'flow_field.png';
+  link.href = document.querySelector('canvas').toDataURL()
+  link.click();
+  loop();
+}
+
+
+
+function setBackgroundColor() {
+  // Avoids clearing the content
+  canvas.style("background-color", backgroundColorPicker.value())
+}
+// Create particles
+function createEmptyParticles() {
+  particles = [];
+  for (let i = 0; i < particleSlider.value(); i++) {
+    particles[i] = new Particle(rectWidth, rectHeight);
+  }
+}
+
+function clearContent() {
+  clear();  
+  createEmptyParticles();
+  flowfield = [];  
+  xoff = X_START = random(100);
+  yoff = random(100);
+  zoff = random(100);
+}
+
+function setup()
+{
+    let container=createDiv().id("main-container");
+    let controls=makeControls();
+    controls.parent(container);
+    let canvasContainer=createDiv();
+    canvas=createCanvas((windowWidth-20)*0.8,(windowHeight-180)*0.8).id("canvas-container");
+    setBackgroundColor();
+    canvas.parent(canvasContainer);
+    canvasContainer.parent(container);
+
+    colorMode(RGB,100);
+
+    getSize();
+    createEmptyParticles();
+}
+
+function getSize() {
+  // Construct a grid of rectangles (rows/columns)
+  nrow = nrowSlider.value();
+  ncol = ncolSlider.value();
+  rectWidth = width / ncol;
+  rectHeight = height / nrow;
+}
+
+function draw() {  
+  getSize();  
+  // Iterate through grid and set vector forces
+  for (let row = 0; row < nrow; row++) {
+    for (let col = 0; col < ncol; col++) {
+      let angle = noise(xoff, yoff, zoff) * 4 * PI;
+      var v = p5.Vector.fromAngle(angle);
+      v.setMag(1);      
+      flowfield.push([v.x, v.y]);
+      xoff += xIncrementSlider.value();
     }
-    r=0,g=0,b=0;
-    return [r,g,b];
+    xoff = X_START;
+    yoff += yIncrementSlider.value();
+  }
+
+  // Position particles given field of vector forces
+  for (var i = 0; i < particles.length; i++) {
+    particles[i].follow(flowfield);
+    particles[i].update();
+    particles[i].edges();
+    particles[i].show();
+  }
+  zoff += zIncrementSlider.value(); // think of this as time!
 }
-function screenchk(v) {
-  return v.x >= 0 && v.x <= width && v.y >= 0 && v.y <= height;
-}
-// noiseSeed(randomSeed(seed));
-// function mouseClicked()
-// {
-//     // if(mouseX>=0 && mouseX<=width && mouseY>=0 && mousey<=height)
-//     // {
-//     // }
-//     noiseSeed(randomSeed(seed));
-// }

@@ -6,7 +6,7 @@ function Slider(label,min=0,max=50,val=10,step=1,parent=createDiv(),update=()=>{
     let slider=createSlider(min,max,val,step);
     slider.input(update);
     slider.class("form-control-range");
-    slider.parent(wrapper);
+    slider.parent(wrap);
     return (slider);
 }
 
@@ -23,7 +23,7 @@ function Button(text,parent,callback,type="not_modal")
     }
     button.parent(buttonwrap);
     buttonwrap.parent(parent);
-    button.mousPressed(callback);
+    button.mousePressed(callback);
 }
 
 

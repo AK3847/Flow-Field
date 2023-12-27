@@ -3,7 +3,7 @@ function Particle(cellW,cellH)
     this.pos=createVector(random(width),random(height));
     this.vel=createVector(0,0);
     this.acc=createVector(0,0);
-    this.maxSpeed=4;
+    this.maxSpeed=2;
     this.prevPos=this.pos.copy();
     
 
@@ -12,7 +12,7 @@ function Particle(cellW,cellH)
         this.vel.add(this.acc);
         this.vel.limit(this.maxSpeed);
         this.pos.add(this.vel);
-        this.acc.mul(0);
+        this.acc.mult(0);
     };
     
     this.follow=function(vec)
@@ -42,7 +42,7 @@ function Particle(cellW,cellH)
     {
         stroke(this.getcolor());
         strokeWeight(.3);
-        line(this.x,this.y,this.prevPos.x,this.prevPos.y);
+        line(this.pos.x,this.pos.y,this.prevPos.x,this.prevPos.y);
         this.updateprev();
     };
 
