@@ -1,17 +1,23 @@
+@font-face {
+  font-family: mordona;
+  src: url(/assets/Raleway-Italic-VariableFont_wght.ttf);
+}
 html,
 body {
   margin: 0;
   padding: 0;
+  background-color: black;
 }
-canvas {
-  padding: 0;
-  height: 0;
-  width: 0;
-}
-main {
+#nav{
   width: 100%;
-  height: 100%;
+  height: 20vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  line-height: 0%;
+  font-size: 6em;
+  padding-bottom: 2%;
+  font-family: mordona;
+  font-weight: 100;
+  color: white;
+  /* text-decoration: underline; */
 }
