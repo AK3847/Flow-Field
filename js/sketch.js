@@ -20,7 +20,7 @@ function makeControls()
   yIncre = Slider("<span>Vertical Flow Intenstiy</span>", minVal = .0001, maxVal = .3, value = .05, step = .0001, parent = controlWrap, clearCanvas);
   opacitySlide = Slider("<span>Line Opacity</span>", minVal = 0, maxVal = 1, value = .1, step = .01, parent = controlWrap);
   strokeCP = Colorpicker("<span>Line Color</span>", startColor = "rgb(96, 158, 162)", parent = controlWrap);
-  backgroundColorPicker = Colorpicker("<span>Background Color</span>", startColor = "black", parent = controlWrap, (d) => setBackgroundColor(d));
+  // backgroundColorPicker = Colorpicker("<span>Background Color</span>", startColor = "black", parent = controlWrap, (d) => setBackgroundColor(d));
 
   // Buttons
   Button("&nbsp;&nbsp;Pause&nbsp;&nbsp;", controlWrap, noLoop);
@@ -47,7 +47,8 @@ function download() {
 
 function setBackgroundColor() {
   // Avoids clearing the content
-  canvas.style("background-color", backgroundColorPicker.value())
+  // canvas.style("background-color", backgroundColorPicker.value())
+  canvas.style("background-color","#000000");
 }
 // Create particles
 function createEmptyParticles() {
