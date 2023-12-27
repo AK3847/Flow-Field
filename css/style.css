@@ -121,6 +121,7 @@ a{
     #main-container{
       display: flex;
       flex-direction: column;
+      padding-left: 2vh;
     }
     #footer{
       visibility: hidden;
