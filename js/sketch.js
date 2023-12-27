@@ -9,28 +9,28 @@ let xIncre, yIncre, zIncre, partSlide, opacitySlide, strokeCP, backgroundColorPi
 function makeControls()
 {
 
-  let controlWrapper = createDiv().id("control-wrap");
-  let controlHeader = createDiv("<p>Controls</p>");
-  controlHeader.parent(controlWrapper);
-  nrowSlider = Slider("<span>Vertical Anchors</span>", minVal = 2, maxVal = 50, value = 30, step = 1, parent = controlWrapper, clearContent);
-  ncolSlider = Slider("<span>Horizontal Anchors</span>", minVal = 2, maxVal = 50, value = 30, step = 1, parent = controlWrapper, clearContent);
-  xIncre = Slider("<span>Horizontal Smoothness</span>", minVal = .0001, maxVal = .3, value = .05, step = .0001, parent = controlWrapper, clearContent);
-  yIncre = Slider("<span>Vertical Smoothness</span>", minVal = .0001, maxVal = .3, value = .05, step = .0001, parent = controlWrapper, clearContent);
-  zIncre = Slider("<span>Fluctuations in Forces</span>", minVal = 0, maxVal = .3, value = .01, step = .0001, parent = controlWrapper, clearContent);
-  partSlide = Slider("<span>Number of Particles</span>", minVal = 10, maxVal = 10000, value = 2000, step = 10, parent = controlWrapper, clearContent);
-  opacitySlide = Slider("<span>Line Opacity</span>", minVal = 0, maxVal = 1, value = .1, step = .01, parent = controlWrapper);
-  strokeCP = Colorpicker("<span>Line Color</span>", startColor = "rgb(96, 158, 162)", parent = controlWrapper);
-  backgroundColorPicker = Colorpicker("<span>Background Color</span>", startColor = "black", parent = controlWrapper, (d) => setBackgroundColor(d));
+  let controlWrap = createDiv().id("control-wrap");
+  let controlHead = createDiv("<p>Tools</p>");
+  controlHead.parent(controlWrap);
+  partSlide = Slider("<span>Number of Particles</span>", minVal = 10, maxVal = 10000, value = 1000, step = 10, parent = controlWrap, clearCanvas);
+  zIncre = Slider("<span>Change in Force</span>", minVal = 0, maxVal = .3, value = .01, step = .0001, parent = controlWrap, clearCanvas);
+  nrowSlider = Slider("<span>Vertical Drift</span>", minVal = 2, maxVal = 50, value = 30, step = 1, parent = controlWrap, clearCanvas);
+  ncolSlider = Slider("<span>Horizontal Drift</span>", minVal = 2, maxVal = 50, value = 30, step = 1, parent = controlWrap, clearCanvas);
+  xIncre = Slider("<span>Horizontal Flow Intensity</span>", minVal = .0001, maxVal = .3, value = .05, step = .0001, parent = controlWrap, clearCanvas);
+  yIncre = Slider("<span>Vertical Flow Intenstiy</span>", minVal = .0001, maxVal = .3, value = .05, step = .0001, parent = controlWrap, clearCanvas);
+  opacitySlide = Slider("<span>Line Opacity</span>", minVal = 0, maxVal = 1, value = .1, step = .01, parent = controlWrap);
+  strokeCP = Colorpicker("<span>Line Color</span>", startColor = "rgb(96, 158, 162)", parent = controlWrap);
+  backgroundColorPicker = Colorpicker("<span>Background Color</span>", startColor = "black", parent = controlWrap, (d) => setBackgroundColor(d));
 
   // Buttons
-  Button("Pause", controlWrapper, noLoop);
-  Button("Resume", controlWrapper, loop);
-  Button("Clear&nbsp;&nbsp;", controlWrapper, clearContent);
-  Button("Download", controlWrapper, download);
-  Button("GitHub", controlWrapper, () => {
+  Button("&nbsp;&nbsp;Pause&nbsp;&nbsp;", controlWrap, noLoop);
+  Button("&nbsp;Resume", controlWrap, loop);
+  Button("&nbsp;&nbsp;&nbsp;Clear&nbsp;&nbsp;&nbsp;&nbsp;", controlWrap, clearCanvas);
+  Button("Download", controlWrap, download);
+  Button("&nbsp;&nbsp;GitHub&nbsp;&nbsp;", controlWrap, () => {
     window.open("https://github.com/AK3847/Flow-Field", "_blank");
   });
-  return controlWrapper;
+  return controlWrap;
 
 }
 
@@ -57,7 +57,7 @@ function createEmptyParticles() {
   }
 }
 
-function clearContent() {
+function clearCanvas() {
   clear();  
   createEmptyParticles();
   flowfield = [];  

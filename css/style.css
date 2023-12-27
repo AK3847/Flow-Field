@@ -6,6 +6,10 @@
   font-family: Aracme;
   src: url(/assets/Aracme\ Waround.ttf);
 }
+@font-face {
+  font-family: maison;
+  src: url(/assets/MaisondeartisanfreeRegular-qZl52.otf);
+}
 html,
 body {
   margin: 0;
@@ -38,17 +42,20 @@ body {
 
 #control-wrap{
   margin-left: 0.2em;
-  font-family: mordona;
+  font-family: maison;
   max-width:200px;
   display:inline-block;
   max-height:calc(80vh - 100px);
-  color: white;
+  color: #B0A695;
+  font-weight: 800;
+  font-size: 1.1em;
 }
 
 #control-wrap p{
-  margin-left: 0.2em;
-  font-size: 2em; 
+  margin-left: 0em;
+  font-size: 3em; 
   line-height: 0%;
+  margin-bottom: 0.6em;
 }
 
 #control-wrap span{
@@ -83,7 +90,7 @@ a{
 }
 
 #canvas-container{
-  border: 0.02em solid #FDE5D4;
+  border: 0.001em outset #FDE5D4;
 }
 
 #two{
