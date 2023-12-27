@@ -16,116 +16,114 @@ body {
   padding: 0;
   background-color: black;
 }
-#nav{
+#nav {
   width: 100%;
   height: 20vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
   line-height: 0%;
-  font-size: max(6vw,6vh);
+  font-size: max(6vw, 6vh);
   /* font-size: 20px; */
   padding-bottom: 2%;
   font-family: Aracme;
   font-weight: 100;
-  color: #FDE5D4;
+  color: #fde5d4;
   /* text-decoration: underline; */
 }
-#nav span{
+#nav span {
   visibility: collapse;
   display: none;
   font-family: mordona;
 }
-#nav p{
-  /* flex: 50%; */
-}
-
-#control-wrap{
+#control-wrap {
   margin-left: 0.2em;
   font-family: maison;
-  max-width:200px;
-  display:inline-block;
-  max-height:calc(80vh - 100px);
-  color: #B0A695;
+  max-width: 200px;
+  display: inline-block;
+  max-height: calc(80vh - 100px);
+  color: #b0a695;
   font-weight: 800;
   font-size: 1.1em;
 }
 
-#control-wrap p{
+#control-wrap p {
   margin-left: 0em;
-  font-size: 3em; 
+  font-size: 3em;
   line-height: 0%;
   margin-bottom: 0.6em;
 }
 
-#control-wrap span{
+#control-wrap span {
   margin: 0.3em;
 }
 
-#main-container{
+#main-container {
   display: flex;
   flex-direction: row;
 }
 
-
-#footer{
+#footer {
   font-family: mordona;
   display: flex;
   justify-content: center;
   text-align: center;
   width: 100%;
-  color: #FDE5D4;
+  color: #fde5d4;
   /* z-index: 999; */
   position: absolute;
   bottom: 0;
 }
 
-a{
+a {
   text-decoration: none;
   color: inherit;
 }
 
-.butn{
-  background-color:#FDE5D4;
+.butn {
+  background-color: #fde5d4;
 }
 
-#canvas-container{
-  border: 0.001em outset #FDE5D4;
+#canvas-container {
+  border: 0.001em outset #fde5d4;
 }
 
-#two{
+#two {
   font-weight: 400;
-  color: #FDE5D4;
+  color: #fde5d4;
   font-weight: 200;
 }
-@media screen and (max-width:560px) {
-    #nav{
-      flex-direction: column;
-      margin-top: 20px;
-    }  
-    #nav p{
-      font-size: 14vw;
-      margin-top: 10px;
-    }
-    #control-wrap p{
-      font-size: 2em; 
-      line-height: 0%;
-    }
-    #control-wrap span{
-      margin: 0.3em;
-      font-size: 1em;
-    }
-    #main-container{
-      display: flex;
-      flex-direction: column;
-    }
-    #footer{
-      visibility: hidden;
-    }
-    #nav span{
-      visibility: visible;
-      display: block;
-      font-size: 0.3em;
-
-    }
+.butn {
+  cursor: pointer;
+}
+@media screen and (max-width: 560px) {
+  #nav {
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  #nav p {
+    font-size: 14vw;
+    margin-top: 10px;
+  }
+  #control-wrap p {
+    font-size: 2em;
+    line-height: 0%;
+  }
+  #control-wrap span {
+    margin: 0.3em;
+    font-size: 1em;
+  }
+  #main-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 2vh;
+  }
+  #footer {
+    visibility: hidden;
+  }
+  #nav span {
+    visibility: visible;
+    display: block;
+    font-size: 0.3em;
+  }
 }

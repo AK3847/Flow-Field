@@ -20,7 +20,7 @@ function makeControls()
   yIncre = Slider("<span>Vertical Flow Intenstiy</span>", minVal = .0001, maxVal = .3, value = .05, step = .0001, parent = controlWrap, clearCanvas);
   opacitySlide = Slider("<span>Line Opacity</span>", minVal = 0, maxVal = 1, value = .1, step = .01, parent = controlWrap);
   strokeCP = Colorpicker("<span>Line Color</span>", startColor = "rgb(96, 158, 162)", parent = controlWrap);
-  backgroundColorPicker = Colorpicker("<span>Background Color</span>", startColor = "black", parent = controlWrap, (d) => setBackgroundColor(d));
+  // backgroundColorPicker = Colorpicker("<span>Background Color</span>", startColor = "black", parent = controlWrap, (d) => setBackgroundColor(d));
 
   // Buttons
   Button("&nbsp;&nbsp;Pause&nbsp;&nbsp;", controlWrap, noLoop);
@@ -35,7 +35,7 @@ function makeControls()
 }
 
 function download() {
-  noLoop(); // pause
+  noLoop();
   let link = document.createElement('a');
   link.download = 'flow_field.png';
   link.href = document.querySelector('canvas').toDataURL()
@@ -46,10 +46,11 @@ function download() {
 
 
 function setBackgroundColor() {
-  // Avoids clearing the content
-  canvas.style("background-color", backgroundColorPicker.value())
+  // canvas.style("background-color", backgroundColorPicker.value())
+  canvas.style("background-color","#000000");
 }
-// Create particles
+
+
 function createEmptyParticles() {
   particles = [];
   for (let i = 0; i < partSlide.value(); i++) {
@@ -84,7 +85,6 @@ function setup()
 }
 
 function getSize() {
-  // Construct a grid of rectangles (rows/columns)
   nrow = nrowSlider.value();
   ncol = ncolSlider.value();
   rectWidth = width / ncol;
@@ -93,10 +93,9 @@ function getSize() {
 
 function draw() {  
   getSize();  
-  // Iterate through grid and set vector forces
   for (let row = 0; row < nrow; row++) {
     for (let col = 0; col < ncol; col++) {
-      let angle = noise(xoff, yoff, zoff) * 4 * PI;
+      let angle = noise(xoff, yoff, zoff) * 2 * PI;
       var v = p5.Vector.fromAngle(angle);
       v.setMag(1);      
       flowfield.push([v.x, v.y]);
@@ -105,13 +104,11 @@ function draw() {
     xoff = X_START;
     yoff += yIncre.value();
   }
-
-  // Position particles given field of vector forces
   for (var i = 0; i < particles.length; i++) {
     particles[i].follow(flowfield);
     particles[i].update();
     particles[i].edges();
     particles[i].show();
   }
-  zoff += zIncre.value(); // think of this as time!
+  zoff += zIncre.value()*2; 
 }
