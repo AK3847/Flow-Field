@@ -72,7 +72,7 @@ function setup()
     let controls=makeControls();
     controls.parent(container);
     let canvasContainer=createDiv();
-    canvas=createCanvas((windowWidth-20)*0.8,(windowHeight-180)*0.8).id("canvas-container");
+    canvas=createCanvas((windowWidth)*0.85,(windowHeight-120)*0.8).id("canvas-container");
     setBackgroundColor();
     canvas.parent(canvasContainer);
     canvasContainer.parent(container);
