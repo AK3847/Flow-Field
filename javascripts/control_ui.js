@@ -16,11 +16,6 @@ function Button(text,parent,callback,type="not_modal")
     buttonwrap.class("button-wrapper");
     let button=createButton(text);
     button.class("butn");
-    if(type=="modal")
-    {
-        button.attribute("data-toggle","modal");
-        button.attribute("data-target","#exampleModal");
-    }
     button.parent(buttonwrap);
     buttonwrap.parent(parent);
     button.mousePressed(callback);
@@ -36,6 +31,5 @@ function Colorpicker(label="Pick a color",startcolor="blue",parent=createDiv(),u
     let picker=createColorPicker(startcolor);
     picker.input(()=>update(picker.value()));
     picker.parent(wrap);
-    picker.class("form-control-range");
     return (picker);
 }

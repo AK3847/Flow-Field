@@ -31,9 +31,9 @@ function Particle(cellW,cellH)
 
     this.getcolor=function()
     {
-        let color=strokeColorPicker.color()
+        let color=strokeCP.color()
         ._array.slice(0,3)
-        .concat(opacitySlider.value())
+        .concat(opacitySlide.value())
         .map((d)=>d*100);
         return (color);
     };

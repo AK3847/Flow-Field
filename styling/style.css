@@ -24,12 +24,47 @@ body {
 
 #control-wrap{
   font-family: mordona;
-  max-width:20%;
+  max-width:22%;
   /* overflow-y: scroll; */
   max-height:calc(100vh - 150px);
   color: white;
 }
 
+#control-wrap p{
+  font-size: 2em; 
+  line-height: 0%;
+}
+
+#control-wrap span{
+  margin: 0.3em;
+}
+
 #main-container{
   display: flex;
+}
+
+
+#footer{
+  font-family: mordona;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  color: #F5EDCE;
+  z-index: 999;
+  position: absolute;
+  bottom: 0;
+}
+
+#footer a{
+  text-decoration: none;
+  color: inherit;
+}
+
+.butn{
+  background-color:#F5EDCE;
+}
+
+#canvas-container{
+  border: 0.02em solid #F5EDCE;
 }

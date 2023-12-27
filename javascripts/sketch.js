@@ -4,30 +4,29 @@ let xoff=0,yoff=0,zoff=0;
 let particles=[],flowfield=[];
 let canvas;
 let nrow, ncol, rectWidth, rectHeight;
-let xIncrementSlider, yIncrementSlider, zIncrementSlider, particleSlider, opacitySlider, strokeColorPicker, backgroundColorPicker;
+let xIncre, yIncre, zIncre, partSlide, opacitySlide, strokeCP, backgroundColorPicker;
 
 function makeControls()
 {
 
   let controlWrapper = createDiv().id("control-wrap");
-  let controlHeader = createDiv("<h2>Controls</h2>");
+  let controlHeader = createDiv("<p>Controls</p>");
   controlHeader.parent(controlWrapper);
-  nrowSlider = Slider("Vertical Anchors", minVal = 2, maxVal = 50, value = 30, step = 1, parent = controlWrapper, clearContent);
-  ncolSlider = Slider("Horizontal Anchors", minVal = 2, maxVal = 50, value = 30, step = 1, parent = controlWrapper, clearContent);
-  xIncrementSlider = Slider("Horizontal Smoothness", minVal = .0001, maxVal = .3, value = .05, step = .0001, parent = controlWrapper, clearContent);
-  yIncrementSlider = Slider("Vertical Smoothness", minVal = .0001, maxVal = .3, value = .05, step = .0001, parent = controlWrapper, clearContent);
-  zIncrementSlider = Slider("Fluctuations in Forces", minVal = 0, maxVal = .3, value = .01, step = .0001, parent = controlWrapper, clearContent);
-  particleSlider = Slider("Number of Particles", minVal = 10, maxVal = 10000, value = 500, step = 10, parent = controlWrapper, clearContent);
-  opacitySlider = Slider("Line Opacity", minVal = 0, maxVal = 1, value = .1, step = .01, parent = controlWrapper);
-  strokeColorPicker = Colorpicker("Line Color", startColor = "rgb(216, 60, 95)", parent = controlWrapper);
-  backgroundColorPicker = Colorpicker("Background Color", startColor = "black", parent = controlWrapper, (d) => setBackgroundColor(d));
+  nrowSlider = Slider("<span>Vertical Anchors</span>", minVal = 2, maxVal = 50, value = 30, step = 1, parent = controlWrapper, clearContent);
+  ncolSlider = Slider("<span>Horizontal Anchors</span>", minVal = 2, maxVal = 50, value = 30, step = 1, parent = controlWrapper, clearContent);
+  xIncre = Slider("<span>Horizontal Smoothness</span>", minVal = .0001, maxVal = .3, value = .05, step = .0001, parent = controlWrapper, clearContent);
+  yIncre = Slider("<span>Vertical Smoothness</span>", minVal = .0001, maxVal = .3, value = .05, step = .0001, parent = controlWrapper, clearContent);
+  zIncre = Slider("<span>Fluctuations in Forces</span>", minVal = 0, maxVal = .3, value = .01, step = .0001, parent = controlWrapper, clearContent);
+  partSlide = Slider("<span>Number of Particles</span>", minVal = 10, maxVal = 10000, value = 2000, step = 10, parent = controlWrapper, clearContent);
+  opacitySlide = Slider("<span>Line Opacity</span>", minVal = 0, maxVal = 1, value = .1, step = .01, parent = controlWrapper);
+  strokeCP = Colorpicker("<span>Line Color</span>", startColor = "rgb(96, 158, 162)", parent = controlWrapper);
+  backgroundColorPicker = Colorpicker("<span>Background Color</span>", startColor = "black", parent = controlWrapper, (d) => setBackgroundColor(d));
 
   // Buttons
   Button("Pause", controlWrapper, noLoop);
   Button("Resume", controlWrapper, loop);
   Button("Clear&nbsp;&nbsp;", controlWrapper, clearContent);
   Button("Download", controlWrapper, download);
-  Button("About", controlWrapper, () => {}, "modal");
   Button("GitHub", controlWrapper, () => {
     window.open("https://github.com/AK3847/Flow-Field", "_blank");
   });
@@ -53,7 +52,7 @@ function setBackgroundColor() {
 // Create particles
 function createEmptyParticles() {
   particles = [];
-  for (let i = 0; i < particleSlider.value(); i++) {
+  for (let i = 0; i < partSlide.value(); i++) {
     particles[i] = new Particle(rectWidth, rectHeight);
   }
 }
@@ -101,10 +100,10 @@ function draw() {
       var v = p5.Vector.fromAngle(angle);
       v.setMag(1);      
       flowfield.push([v.x, v.y]);
-      xoff += xIncrementSlider.value();
+      xoff += xIncre.value();
     }
     xoff = X_START;
-    yoff += yIncrementSlider.value();
+    yoff += yIncre.value();
   }
 
   // Position particles given field of vector forces
@@ -114,5 +113,5 @@ function draw() {
     particles[i].edges();
     particles[i].show();
   }
-  zoff += zIncrementSlider.value(); // think of this as time!
+  zoff += zIncre.value(); // think of this as time!
 }
