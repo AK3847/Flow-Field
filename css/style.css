@@ -98,6 +98,9 @@ a{
   color: #FDE5D4;
   font-weight: 200;
 }
+.butn{
+  cursor:pointer;
+}
 @media screen and (max-width:560px) {
     #nav{
       flex-direction: column;
