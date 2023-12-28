@@ -2,7 +2,7 @@
 <img src="assets/img/android-chrome-512x512.png" alt="logo" align="right" width="120" height="120" padding="20">
 <p>
   Flow Fields are a way to generate dynamic and visually interesting shapes and designs using <i>Vectors</i> to control the flow of particles in a given space. The position of particle is calculated pseudo randomly
-  by the <i>Perlin Noise</i>.<br> The tool is made using <b>p5js</b> library <a href="https://p5js.org/" target="__blank"> 🡭 </a> and it's inspired from this video series <a href="https://www.youtube.com/watch?v=Qf4dIN99e2w&list=PLRqwX-V7Uu6bgPNQAdxQZpJuJCjeOr7VD" target="_blank"> 🡭 </a>
+  by the <i>Perlin Noise</i>.<br> The tool is made using <b>p5js</b> library <a href="https://external.ink?to=p5js.org/" target="_blank"> 🡭 </a> and it's inspired from this video series <a href="https://www.youtube.com/watch?v=Qf4dIN99e2w&list=PLRqwX-V7Uu6bgPNQAdxQZpJuJCjeOr7VD" target="_blank"> 🡭 </a>
 </p>
 
 ## Examples
@@ -12,3 +12,5 @@
 
 ## Contribution
 The project is open to feature suggestion or contribution, just raise an issue!
+
+
