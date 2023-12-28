@@ -7,4 +7,5 @@
 
 <h1>Examples</h1>
 <!-- ![Yellow Lines]([assests/img/flow_field0.png](https://github.com/AK3847/Flow-Field/blob/master/assets/img/flow_field0.png)https://github.com/AK3847/Flow-Field/blob/master/assets/img/flow_field0.png) -->
-![yellow lines](https://github.com/AK3847/Flow-Field/blob/master/assets/img/flow_field0.png)
+<!-- ![yellow lines](https://github.com/AK3847/Flow-Field/blob/master/assets/img/flow_field0.png)-->
+<img src="assets/img/flow_field0.png"/>
