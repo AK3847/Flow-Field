@@ -78,7 +78,7 @@ function makeControls() {
   );
   strokeCP = Colorpicker(
     "<span>Line Color</span>",
-    (startColor = "rgb(163, 98, 160)"),
+    (startColor = "#A362A0"),
     (parent = controlWrap)
   );
   // backgroundColorPicker = Colorpicker("<span>Background Color</span>", startColor = "black", parent = controlWrap, (d) => setBackgroundColor(d));
