@@ -39,5 +39,15 @@ function Colorpicker(
   let picker = createColorPicker(startcolor);
   picker.input(() => update(picker.value()));
   picker.parent(wrap);
+
+  //input field for colour.
+  let hexInput = createInput(startcolor);
+  hexInput.parent(wrap);
+  hexInput.input(() => {
+    picker.value(hexInput.value());
+    update(hexInput.value());
+  });
+  //returns the value of field last changed.
   return picker;
+  
 }
