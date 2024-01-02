@@ -1,20 +1,28 @@
 let X_START = 0;
-const Y_START = 0;
+// const Y_START = 0;
+//variables to control the offsets in x,y,z direction
 let xoff = 0,
   yoff = 0,
   zoff = 0;
+//vectors to store particles and flowfields
 let particles = [],
   flowfield = [];
-let canvas;
-let nrow, ncol, rectWidth, rectHeight;
-let xIncre, yIncre, zIncre;
-let partSlide, opacitySlide, strokeCP, backgroundColorPicker;
 
+let canvas; //variable to contain the main canvas
+
+let nrow, ncol, rectWidth, rectHeight; //variables to store number of rows and cols and rectangle-cell width & height
+
+let xIncre, yIncre, zIncre; //variables to store increments in x,y,z direction
+
+let particles_num, opacitySlide, strokeCP, backgroundColorPicker;
+
+
+//function to make individual slide bars and buttons to control the flowfields
 function makeControls() {
   let controlWrap = createDiv().id("control-wrap");
   let controlHead = createDiv("<p>Tools</p>");
   controlHead.parent(controlWrap);
-  partSlide = Slider(
+  particles_num = Slider(
     "<span>Number of Particles</span>",
     (minVal = 100),
     (maxVal = 8000),
@@ -97,6 +105,8 @@ function makeControls() {
   });
   return controlWrap;
 }
+
+// function to get random value for z-increment i.e noise
 function randn_bm() {
   let u = 0, v = 0;
   while(u === 0) u = Math.random();
@@ -106,6 +116,8 @@ function randn_bm() {
   if (num > 1 || num < 0) return randn_bm() 
   return num
 }
+
+//function to let the user download the canvas
 function download() {
   noLoop();
   let link = document.createElement("a");
@@ -115,18 +127,22 @@ function download() {
   loop();
 }
 
+//function to update the background color - not working as of now will be fixing in future commits!!
 function setBackgroundColor() {
   // canvas.style("background-color", backgroundColorPicker.value())
   canvas.style("background-color", "#000000");
 }
 
+
+//function to create initial particles
 function createEmptyParticles() {
   particles = [];
-  for (let i = 0; i < partSlide.value(); i++) {
+  for (let i = 0; i < particles_num.value(); i++) {
     particles[i] = new Particle(rectWidth, rectHeight);
   }
 }
 
+//funcion to clear canvas and restart
 function clearCanvas() {
   clear();
   createEmptyParticles();
@@ -136,6 +152,7 @@ function clearCanvas() {
   zoff = random(100);
 }
 
+//initial setup function
 function setup() {
   let container = createDiv().id("main-container");
   let controls = makeControls();
@@ -148,12 +165,13 @@ function setup() {
   canvas.parent(canvasContainer);
   canvasContainer.parent(container);
 
-  colorMode(RGB, 255);
+  colorMode(RGB, 255); //chaning colormode to RGB mapped to 255 units
 
   getSize();
   createEmptyParticles();
 }
 
+//function to get size of each cell 
 function getSize() {
   nrow = nrowSlider.value();
   ncol = ncolSlider.value();
@@ -161,6 +179,8 @@ function getSize() {
   rectHeight = height / nrow;
 }
 
+
+// draw canvas function
 function draw() {
   getSize();
   for (let row = 0; row < nrow; row++) {
